@@ -30,7 +30,7 @@ public class User {
 	private String email;
 	
 	@NotBlank(message = "Password field is required")
-	@Size(min=8, max = 12, message = "Min 8 and max 12 chars required")
+//	@Size(min=8, max = 12, message = "Min 8 and max 12 chars required")
 	private String password;
 	
 	private String role;
