@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
@@ -19,10 +21,18 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@NotBlank(message = "Name field is required")
+	@Size(min=2, max = 20, message = "Min 2 and max 20 character required")
 	private String name;
+	
 	@Column(unique = true)
 	private String email;
+	
+	@NotBlank(message = "Password field is required")
+	@Size(min=8, max = 12, message = "Min 8 and max 12 chars required")
 	private String password;
+	
 	private String role;
 	private boolean enable;
 	private String imageUrl;

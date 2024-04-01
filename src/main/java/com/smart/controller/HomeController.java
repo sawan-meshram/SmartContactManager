@@ -1,10 +1,12 @@
 package com.smart.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,7 +56,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/do_register", method=RequestMethod.POST)
-	public String registerUser(@ModelAttribute("user") User user, //accepting the User from form page 
+	public String registerUser(@Valid @ModelAttribute("user") User user, //accepting the User from form page 
+			BindingResult result, //binding result for validation
 			@RequestParam(value = "agreement", defaultValue = "false") boolean agreement, //accepting the checkbox value from form page
 			Model model, //Use this model to send server-side information to client-side
 			HttpSession session) //created a session
@@ -65,6 +68,13 @@ public class HomeController {
 				System.out.println("You have not agreed the terms and conditions");
 				throw new Exception("You have not agreed the terms and conditions");
 			}
+			
+			if(result.hasErrors()) {
+				System.out.println("ERROR :"+result.toString());
+				model.addAttribute("user", user); //return user data to client-end
+				return "signup";
+			}
+//			System.out.println("BindingResult :"+result.toString());
 
 			System.out.println("Agreement :"+agreement);
 
@@ -73,9 +83,9 @@ public class HomeController {
 			user.setEnable(true);
 			user.setImageUrl("default.png");
 			
-			User result = this.userRepository.save(user);
+			User result1 = this.userRepository.save(user);
 			
-			System.out.println(result);
+			System.out.println(result1);
 			
 			model.addAttribute("user", new User()); //send new User in case, user added successfully
 			session.setAttribute("message", new Message("Registered successfully!!", "alert-success"));
