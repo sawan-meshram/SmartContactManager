@@ -69,18 +69,33 @@ public class Contact {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
+	
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	@Override
+	public String toString() {
+		return "Contact [cid=" + cid + ", name=" + name + ", nickName=" + nickName + ", work=" + work + ", email="
+				+ email + ", phone=" + phone + ", image=" + image + ", description=" + description + "]";
+	}
+	
+	
+	
+//	@Override
+//	public String toString() {
+//		return "Contact [cid=" + cid + ", name=" + name + ", nickName=" + nickName + ", work=" + work + ", email="
+//				+ email + ", phone=" + phone + ", image=" + image + ", description=" + description + ", user=" + user
+//				+ "]";
+//	}
 	
 	
 }
