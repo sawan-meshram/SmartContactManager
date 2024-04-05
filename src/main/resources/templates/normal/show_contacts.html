@@ -7,7 +7,38 @@
 <body>
 	<section>
 	
-		<h1>This is show contact page</h1>
+		<div class="card ms-3 me-3">
+			<div class="card-body">
+				<h1 class="text-center">Your Contacts</h1>
+				
+				<table class="table">
+				  <thead>
+				    <tr>
+				      <th scope="col">#ID</th>
+				      <th scope="col">Name</th>
+				      <th scope="col">Email</th>
+				      <th scope="col">Phone</th>
+				      <th scope="col">Action</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	
+				    <tr th:each="c : ${contacts}">
+				      <th scope="row" th:text="${'SCM2024-'+c.cid}">1</th>
+				      <td th:text="${c.name}"></td>
+					  <td th:text="${c.email}"></td>
+					  <td th:text="${c.phone}"></td>
+
+				      <td>
+				      	<button class="btn btn-danger btn-sm">Delete</button>
+				      	<button class="btn btn-primary btn-sm">Update</button>
+					  </td>
+				    </tr>
+				    
+				  </tbody>
+				</table>
+			</div>
+		</div>
 	</section>
 </body>
 </html>
